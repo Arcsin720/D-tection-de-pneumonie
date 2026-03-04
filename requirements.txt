@@ -10,4 +10,5 @@ jupyter==1.0.0
 notebook==7.0.0
 datasets==2.14.0
 huggingface-hub==0.16.4
+kagglehub>=0.2.0
 tqdm==4.65.0

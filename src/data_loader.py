@@ -1,16 +1,21 @@
 from datasets import load_dataset
+import kagglehub
 
 
 def load_raw_pneumonia_dataset(split: str = "train"):
-    """Charge le dataset raw_pneumonia_x_ray depuis Hugging Face.
+    """Charge le dataset de pneumonie depuis Kaggle.
 
     Args:
         split: split à charger (par défaut: train)
 
     Returns:
-        Un objet Dataset Hugging Face.
+        Un objet Dataset.
     """
-    return load_dataset("mmenendezg/raw_pneumonia_x_ray", split=split)
+    # Download latest version
+    path = kagglehub.dataset_download("iamtanmayshukla/pneumonia-radiography-dataset")
+    print("Path to dataset files:", path)
+    
+    return load_dataset("imagefolder", data_dir=path, split=split)
 
 
 def infer_label_column(dataset):
@@ -20,3 +25,4 @@ def infer_label_column(dataset):
         if col in dataset.column_names:
             return col
     return None
+
